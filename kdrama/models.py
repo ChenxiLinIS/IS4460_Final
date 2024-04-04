@@ -4,16 +4,39 @@ from django.db import models
 class kdrama(models.Model):
     kdrama_id = models.AutoField(primary_key=True)
     title = models.CharField(max_length=100)
-    description = models.CharField(max_length=500, blank=True, null=True)
-    director = models.CharField(max_length=100, blank=True, null=True)
-    release_year = models.CharField(max_length=50, blank=True, null=True)
-    budget = models.CharField(max_length=50, blank=True, null=True)
-    runtime = models.CharField(max_length=50, blank=True, null=True)
-    rating = models.CharField(max_length=50, blank=True, null=True)
-    genre = models.CharField(max_length=50, blank=True, null=True)
-    award = models.CharField(max_length=50, blank=True, null=True)
-    actors = models.CharField(max_length=50, blank=True, null=True)
-    
+    description = models.CharField(max_length=500, blank=True)
+    release_year = models.CharField(max_length=50, blank=True)
+    duration = models.CharField(max_length=50, blank=True)
+
+class character(models.Model):
+    character_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50, blank=True)
+    kdrama = models.ForeignKey(kdrama, on_delete=models.CASCADE)
+
+class actor(models.Model):
+    actor_id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=25, blank=True)
+    last_name = models.CharField(max_length=25, blank=True)
+    birth_date = models.DateField(blank=True, null=True)
+    character = models.ForeignKey(character, on_delete=models.CASCADE)
+
+class director (models.Model):
+    director_id = models.AutoField(primary_key=True)
+    first_name = models.CharField(max_length=25, blank=True)
+    last_name = models.CharField(max_length=25, blank=True)
+    kdrama = models.ForeignKey(kdrama, on_delete=models.CASCADE)
+
+class prod_company(models.Model):
+    prod_company_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, blank=True)
+    year_founded = models.CharField(max_length=50, blank=True)
+    kdrama = models.ForeignKey(kdrama, on_delete=models.CASCADE)
+
+class award(models.Model):
+    award_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=100, blank=True)
+    type = models.CharField(max_length=100, blank=True)
+    kdrama = models.ForeignKey(kdrama, on_delete=models.CASCADE)
 
 class User(models.Model):
     user_id = models.AutoField(primary_key=True)
