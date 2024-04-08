@@ -2,67 +2,60 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.views import View
 from .models import kdrama, character, actor, director, prod_company, award
+from .forms import KdramaForm, CharacterForm, ActorForm, DirectorForm, ProdCompanyForm, AwardForm
 from rest_framework import generics
 from .serializers import KdramaSerializer, CharacterSerializer, ActorSerializer, DirectorSerializer, ProdCompanySerializer, AwardSerializer
 
 # Create your views here.
 
-class KdramaListCreateView(generics.ListCreateAPIView):
+class KdramaList(View):
+    def get(self, request):
+        kdramas = kdrama.objects.all()
+        return render(request=request, template_name='kdrama/kdrama_list.html', context={'kdramas': kdramas})
 
-    queryset = kdrama.objects.all()
-    serializer_class = KdramaSerializer
+class KdramaDetails(View):
+    def get(self, request, kdrama_id):
+        kdrama = get_object_or_404(kdrama, pk=kdrama_id)
+        return render(request=request, template_name='kdrama/kdrama_details.html', context={'kdrama': kdrama})
 
-class KdramaDetailView(generics.RetrieveUpdateDestroyAPIView):
+    
+class KdramaAdd(View):
+    def get(self, request):
 
-    queryset = kdrama.objects.all()
-    serializer_class = KdramaSerializer
+        form = KdramaForm()
 
-class CharacterListCreateView(generics.ListCreateAPIView):
+        return render(request=request, template_name='kdrama/kdrama_add.html', context={'form': form})
 
-    queryset = character.objects.all()
-    serializer_class = CharacterSerializer
+    def post(self, request):
 
-class CharacterDetailView(generics.RetrieveUpdateDestroyAPIView):
+        form = KdramaForm(request.POST)
 
-    queryset = character.objects.all()
-    serializer_class = CharacterSerializer
+        if form.is_valid():
+            form.save()
+            return redirect('kdrama-list') 
+        
+        return render(request=request, template_name='kdrama/kdrama_add.html', context={'form': form})
 
-class ActorListCreateView(generics.ListCreateAPIView):
+class KdramaUpdate(View):
 
-    queryset = actor.objects.all()
-    serializer_class = ActorSerializer
+    def get(self, request, kdrama_id):
 
-class ActorDetailView(generics.RetrieveUpdateDestroyAPIView):
+        movie = get_object_or_404(kdrama, pk=kdrama_id)
 
-    queryset = actor.objects.all()
-    serializer_class = ActorSerializer
+        form = KdramaForm(instance=kdrama)
 
-class DirectorListCreateView(generics.ListCreateAPIView):
+        return render(request=request, template_name='kdrama/kdrama_update.html', context={'form': form, 'kdrama': kdrama})
 
-    queryset = director.objects.all()
-    serializer_class = DirectorSerializer
+    def post(self, request, kdrama_id):
 
-class DirectorDetailView(generics.RetrieveUpdateDestroyAPIView):
+        kdrama = get_object_or_404(kdrama, pk=kdrama_id)
 
-    queryset = director.objects.all()
-    serializer_class = DirectorSerializer
+        form = KdramaForm(request.POST, instance=kdrama)
 
-class ProdCompanyListCreateView(generics.ListCreateAPIView):
+        if form.is_valid():
+            form.save()
+            return redirect('kdrama-list')
+        
+        return render(request=request, template_name='kdrama/kdrama_update.html', context={'form': form, 'kdrama': kdrama})
 
-    queryset = prod_company.objects.all()
-    serializer_class = ProdCompanySerializer
-
-class ProdCompanyDetailView(generics.RetrieveUpdateDestroyAPIView):
-
-    queryset = prod_company.objects.all()
-    serializer_class = ProdCompanySerializer
-
-class AwardListCreateView(generics.ListCreateAPIView):
-
-    queryset = award.objects.all()
-    serializer_class = AwardSerializer
-
-class AwardDetailView(generics.RetrieveUpdateDestroyAPIView):
-
-    queryset = award.objects.all()
-    serializer_class = AwardSerializer
+class KdramaDe
