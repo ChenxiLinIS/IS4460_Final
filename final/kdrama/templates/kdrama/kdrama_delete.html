@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Delete Kdrama{% endblock %}
+{% block content %}
+    <div class="card mt-5">
+        <div class="card-header">
+            <h2 class="mb-0">Delete Kdrama</h2>
+        </div>
+        <div class="card-body">
+            <p class="mb-2">Are you sure you want to delete "{{ kdrama.title }}"?</p>
+            <form method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
