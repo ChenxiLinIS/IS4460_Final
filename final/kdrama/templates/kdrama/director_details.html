@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Director Details{% endblock %}
+{% block content %}
+    <div class="card mt-5">
+        <div class="card-header">
+            <h2 class="mb-0">Director Details</h2>
+        </div>
+        <div class="card-body">
+            <p class="mb-2"><strong>ID:</strong> {{ director.director_id }}</p>
+            <p class="mb-2"><strong>First Name:</strong> {{ director.first_name }}</p>
+            <p class="mb-2"><strong>Last Name:</strong> {{ director.last_name }}</p>
+            <p class="mb-2"><strong>Kdrama:</strong> {{ director.kdrama.title }}</p>
+            <a href="{% url 'director_update' director.director_id %}" class="btn btn-primary">Update</a>
+            <a href="{% url 'director_delete' director.director_id %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'director_list' %}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+{% endblock %}
