@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Update Director{% endblock %}
+{% block content %}
+    <div class="card mt-5">
+        <div class="card-header">
+            <h2 class="mb-0">Update Director</h2>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name" value="{{ director.first_name }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name" value="{{ director.last_name }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="kdrama">Kdrama:</label>
+                    <select class="form-control" id="kdrama" name="kdrama" required>
+                        {% for drama in kdramas %}
+                            <option value="{{ drama.kdrama_id }}" {% if drama.kdrama_id == director.kdrama.kdrama_id %}selected{% endif %}>{{ drama.title }}</option>
+                        {% empty %}
+                            <option disabled>No dramas available</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Director</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}
