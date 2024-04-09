@@ -1,0 +1,41 @@
+
+{% extends 'base.html' %}
+{% block title %}Character List{% endblock %}
+{% block content %}
+    <div class="card mt-5">
+        <div class="card-header">
+            <h2 class="mb-0">Character List</h2>
+        </div>
+        <div class="card-body">
+            <a href="{% url 'character_add' %}" class="btn btn-primary mb-3">Add Character</a>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Kdrama</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for character in characters %}
+                            <tr>
+                                <td>{{ character.character_id }}</td>
+                                <td>{{ character.name }}</td>
+                                <td>{{ character.kdrama.title }}</td>
+                                <td>
+                                    <a href="{% url 'character_details' character.character_id %}" class="btn btn-info btn-sm">Details</a>
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="4">No characters available</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
