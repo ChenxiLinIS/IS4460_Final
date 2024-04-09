@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %}Production Company Details{% endblock %}
+{% block content %}
+    <div class="card mt-5">
+        <div class="card-header">
+            <h2 class="mb-0">Production Company Details</h2>
+        </div>
+        <div class="card-body">
+            <p class="mb-2"><strong>ID:</strong> {{ prod_company.prod_company_id }}</p>
+            <p class="mb-2"><strong>Name:</strong> {{ prod_company.name }}</p>
+            <p class="mb-2"><strong>Founded:</strong> {{ prod_company.year_founded }}</p>
+            <p class="mb-2"><strong>Associated Kdrama:</strong> {{ prod_company.kdrama.title }}</p>
+            <a href="{% url 'prodcompany_update' prod_company.prod_company_id %}" class="btn btn-primary">Update</a>
+            <a href="{% url 'prodcompany_delete' prod_company.prod_company_id %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'prodcompany-list' %}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+{% endblock %}
