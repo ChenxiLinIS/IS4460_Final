@@ -1,43 +1,38 @@
-{% extends 'base.html' %}
 
+{% extends 'base.html' %}
+{% block title %}Add Actor{% endblock %}
 {% block content %}
-  <h2>Add Actor</h2>
-  <form method="post" class="form-horizontal">
-    {% csrf_token %}
-    <div class="form-group">
-      <label for="first_name" class="col-sm-2 control-label">First Name:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="first_name" name="first_name" required>
-      </div>
+    <div class="card mt-5">
+        <div class="card-header">
+            <h2 class="mb-0">Add Actor</h2>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name" required>
+                </div>
+                <div class="form-group">
+                    <label for="birth_date">Birth Date:</label>
+                    <input type="date" class="form-control" id="birth_date" name="birth_date" required>
+                </div>
+                <div class="form-group">
+                    <label for="character">Character:</label>
+                    <select class="form-control" id="character" name="character" required>
+                        {% for char in characters %}
+                            <option value="{{ char.character_id }}">{{ char.name }}</option>
+                        {% empty %}
+                            <option disabled>No characters available</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Actor</button>
+            </form>
+        </div>
     </div>
-    <div class="form-group">
-      <label for="last_name" class="col-sm-2 control-label">Last Name:</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="last_name" name="last_name" required>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="birth_date" class="col-sm-2 control-label">Birth Date:</label>
-      <div class="col-sm-10">
-        <input type="date" class="form-control" id="birth_date" name="birth_date" required>
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="character" class="col-sm-2 control-label">Character:</label>
-      <div class="col-sm-10">
-        <select class="form-control" id="character" name="character" required>
-          {% for char in characters %}
-            <option value="{{ char.character_id }}">{{ char.name }}</option>
-          {% empty %}
-            <option disabled>No characters available</option>
-          {% endfor %}
-        </select>
-      </div>
-    </div>
-    <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <button type="submit" class="btn btn-primary">Add Actor</button>
-      </div>
-    </div>
-  </form>
 {% endblock %}
