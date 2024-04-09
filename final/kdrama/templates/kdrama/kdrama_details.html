@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Kdrama Details{% endblock %}
+{% block content %}
+    <div class="card mt-5">
+        <div class="card-header">
+            <h2 class="mb-0">Kdrama Details</h2>
+        </div>
+        <div class="card-body">
+            <p class="mb-2"><strong>ID:</strong> {{ kdrama.kdrama_id }}</p>
+            <p class="mb-2"><strong>Title:</strong> {{ kdrama.title }}</p>
+            <p class="mb-2"><strong>Description:</strong> {{ kdrama.description }}</p>
+            <p class="mb-2"><strong>Date:</strong> {{ kdrama.release_year }}</p>
+            <p class="mb-2"><strong>Duration:</strong> {{ kdrama.duration }}</p>
+            <a href="{% url 'kdrama_update' kdrama.kdrama_id %}" class="btn btn-primary">Update</a>
+            <a href="{% url 'kdrama_delete' kdrama.kdrama_id %}" class="btn btn-danger">Delete</a>
+            <a href="{% url 'kdrama-list' %}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+{% endblock %}
