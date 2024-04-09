@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %}Kdrama List{% endblock %}
+{% block content %}
+    <div class="card mt-5">
+        <div class="card-header">
+            <h2 class="mb-0">Kdrama List</h2>
+        </div>
+        <div class="card-body">
+            <ul>
+                {% for kdrama in kdramas %}
+                    <li><a href="{% url 'kdrama_details' kdrama.kdrama_id %}">{{ kdrama.title }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}
