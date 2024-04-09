@@ -1,0 +1,34 @@
+
+{% extends 'base.html' %}
+{% block title %}Update Actor{% endblock %}
+{% block content %}
+    <div class="card mt-5">
+        <div class="card-header">
+            <h2 class="mb-0">Update Actor</h2>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="first_name">First Name:</label>
+                    <input type="text" class="form-control" id="first_name" name="first_name" value="{{ actor.first_name }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">Last Name:</label>
+                    <input type="text" class="form-control" id="last_name" name="last_name" value="{{ actor.last_name }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="birth_date">Birth Date:</label>
+                    <input type="date" class="form-control" id="birth_date" name="birth_date" value="{{ actor.birth_date }}" required>
+                </div>
+                <div class="form-group">
+                    <label for="character">Character:</label>
+                    <select class="form-control" id="character" name="character" required>
+                        {% for char in characters %}
+                            <option value="{{ char.character_id }}" {% if actor.character.character_id == char.character_id %}selected{% endif %}>{{ char.name }}</option>
+                        {% empty %}
+                            <option disabled>No characters available</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Update
