@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Kdrama List</title>
+</head>
+<body>
+    <h1>Kdrama List.</h1>
+        <ul>
+        {% for kdrama in kdramas %}
+         <li>{{ kdrama.name }}</li>
+            {% endfor %}
+         </ul>
+    <!-- <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Logout</button> 
+    </form> -->
+</body>
+</html>
