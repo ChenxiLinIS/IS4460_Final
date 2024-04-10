@@ -434,7 +434,7 @@ class AwardUpdate(View):
 
     def post(self, request, award_id):
 
-        kdrama = get_object_or_404(kdrama, pk=award_id)
+        award = get_object_or_404(kdrama, pk=award_id)
 
         form = AwardForm(request.POST, instance=award)
 
