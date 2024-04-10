@@ -324,7 +324,7 @@ class ProdCompanyList(View):
 
 class ProdCompanyDetails(View):
     def get(self, request, prod_company_id):
-        prod_company = get_object_or_404(actor, pk=prod_company_id)
+        prod_company = get_object_or_404(prod_company, pk=prod_company_id)
         return render(request=request, template_name='kdrama/prodcompany_details.html', context={'prod_company': prod_company})
 
     
