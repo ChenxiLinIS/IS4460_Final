@@ -1,9 +1,7 @@
-<html>
+{% extends 'base.html' %}
+{% block title %}Log in{% endblock %}
+{% block content %}
 
-<body>
-    <br>
-    <br>
-    <h1>Log In</h1>
     <form method="post">
         {% csrf_token %}
         <label for="id_username">Username:</label>
@@ -14,5 +12,4 @@
         <br>
         <input type="submit" value="Login">
     </form>
-</body>
-</html>
+{% endblock %}
