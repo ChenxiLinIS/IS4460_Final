@@ -125,6 +125,12 @@ kdramas = [
         "description": "A rich young CEO falls for a poor stuntwoman despite class differences, cultural traditions and the man's firmly objecting mother.",
         "release_year": "2010",
         "duration": "20 episodes"
+    },
+    {
+        "title": "Kdrama Test 1",
+        "description": "Test 1.",
+        "release_year": "Test 1.",
+        "duration": "Test episodes"
     }
 ]
 
