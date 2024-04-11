@@ -14,11 +14,11 @@ actor_data = {
 }
 
 
-#send PUT request to update customer
+#send PUT request to update actor
 response = requests.put(api_url, data=json.dumps(actor_data), headers={'Content-Type' : 'application/json'})
 
 #check response status code
 if response.status_code == 200:
     print("Actor updated successfully.")
 else:
-    print("Error udpating Actor.")
+    print("Error updating Actor.")
