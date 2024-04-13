@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 {% block title %}Character List{% endblock %}
 {% block content %}
@@ -7,7 +6,9 @@
             <h2 class="mb-0">Character List</h2>
         </div>
         <div class="card-body">
+            
             <a href="{% url 'character_add' %}" class="btn btn-primary mb-3">Add Character</a>
+            
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
@@ -25,7 +26,14 @@
                                 <td>{{ character.name }}</td>
                                 <td>{{ character.kdrama.title }}</td>
                                 <td>
+                                    
                                     <a href="{% url 'character_details' character.character_id %}" class="btn btn-info btn-sm">Details</a>
+                                    
+                                    
+                                    <a href="{% url 'character_delete' character.character_id %}" class="btn btn-danger btn-sm">Delete</a>
+                                    
+                                    
+                                    <a href="{% url 'character_update' character.character_id %}" class="btn btn-secondary btn-sm">Update</a>
                                 </td>
                             </tr>
                         {% empty %}
@@ -39,3 +47,4 @@
         </div>
     </div>
 {% endblock %}
+
