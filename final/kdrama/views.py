@@ -94,8 +94,8 @@ class CharacterList(View):
 
 class CharacterDetails(View):
     def get(self, request, character_id):
-        character = get_object_or_404(character, pk=character_id)
-        return render(request=request, template_name='kdrama/character_details.html', context={'character': character})
+        character1 = get_object_or_404(character, pk=character_id)
+        return render(request=request, template_name='kdrama/character_details.html', context={'character': character1})
 
     
 class CharacterAdd(View):
@@ -249,8 +249,8 @@ class DirectorList(View):
 
 class DirectorDetails(View):
     def get(self, request, director_id):
-        director1 = get_object_or_404(actor, pk=director_id)
-        return render(request=request, template_name='kdrama/director_details.html', context={'director': director1})
+        directors = get_object_or_404(director, pk=director_id)
+        return render(request=request, template_name='kdrama/director_details.html', context={'director': directors})
 
     
 class DirectorAdd(View):
@@ -274,44 +274,44 @@ class DirectorUpdate(View):
 
     def get(self, request, director_id):
 
-        director = get_object_or_404(director, pk=director_id)
+        directors = get_object_or_404(director, pk=director_id)
 
-        form = DirectorForm(instance=director)
+        form = DirectorForm(instance=directors)
 
-        return render(request=request, template_name='kdrama/director_update.html', context={'form': form, 'director': director})
+        return render(request=request, template_name='kdrama/director_update.html', context={'form': form, 'director': directors})
 
     def post(self, request, director_id):
 
-        director = get_object_or_404(director, pk=director_id)
+        directors = get_object_or_404(director, pk=director_id)
 
-        form = DirectorForm(request.POST, instance=director)
+        form = DirectorForm(request.POST, instance=directors)
 
         if form.is_valid():
             form.save()
             return redirect('director-list')
         
-        return render(request=request, template_name='kdrama/director_update.html', context={'form': form, 'director': director})
+        return render(request=request, template_name='kdrama/director_update.html', context={'form': form, 'director': directors})
 
 class DirectorDelete(View):
 
     def get(self,request,director_id=None):
 
         if director_id:
-            director = director.objects.get(pk=director_id)
+            director1 = director.objects.get(pk=director_id)
         else:
-            director = director()
+            director1 = director()
 
         form = DirectorForm(instance=director)
 
         for field in form.fields:
             form.fields[field].widget.attrs['disabled'] = True
 
-        return render(request = request,template_name = 'kdrama/director_delete.html',context = {'director':director,'form':form})
+        return render(request = request,template_name = 'kdrama/director_delete.html',context = {'director':director1,'form':form})
       
     
     def post(self,request,director_id=None):
 
-        director = director.objects.get(pk=director_id)
+        director1 = director.objects.get(pk=director_id)
 
         form = DirectorForm(request.POST,instance=director)
 
@@ -326,8 +326,8 @@ class ProdCompanyList(View):
 
 class ProdCompanyDetails(View):
     def get(self, request, prod_company_id):
-        prod_company = get_object_or_404(prod_company, pk=prod_company_id)
-        return render(request=request, template_name='kdrama/prodcompany_details.html', context={'prod_company': prod_company})
+        prod_company1 = get_object_or_404(prod_company, pk=prod_company_id)
+        return render(request=request, template_name='kdrama/prodcompany_details.html', context={'prod_company': prod_company1})
 
     
 class ProdCompanyAdd(View):
@@ -351,11 +351,11 @@ class ProdCompanyUpdate(View):
 
     def get(self, request, prod_company_id):
 
-        prod_company = get_object_or_404(prod_company, pk=prod_company_id)
+        prod_company1 = get_object_or_404(prod_company, pk=prod_company_id)
 
-        form = ProdCompanyForm(instance=prod_company)
+        form = ProdCompanyForm(instance=prod_company1)
 
-        return render(request=request, template_name='kdrama/prodcompany_update.html', context={'form': form, 'prod_company': prod_company})
+        return render(request=request, template_name='kdrama/prodcompany_update.html', context={'form': form, 'prod_company': prod_company1})
 
     def post(self, request, prod_company_id):
 
@@ -374,16 +374,16 @@ class ProdCompanyDelete(View):
     def get(self,request,prod_company_id=None):
 
         if prod_company_id:
-            prod_company = prod_company.objects.get(pk=prod_company_id)
+            prod_company1 = prod_company.objects.get(pk=prod_company_id)
         else:
-            prod_company = prod_company()
+            prod_company1 = prod_company()
 
-        form = ProdCompanyForm(instance=prod_company)
+        form = ProdCompanyForm(instance=prod_company1)
 
         for field in form.fields:
             form.fields[field].widget.attrs['disabled'] = True
 
-        return render(request = request,template_name = 'kdrama/prodcompany_delete.html',context = {'prod_company':prod_company,'form':form})
+        return render(request = request,template_name = 'kdrama/prodcompany_delete.html',context = {'prod_company':prod_company1,'form':form})
       
     
     def post(self,request,prod_company_id=None):
@@ -403,8 +403,8 @@ class AwardList(View):
 
 class AwardDetails(View):
     def get(self, request, award_id):
-        award = get_object_or_404(award, pk=award_id)
-        return render(request=request, template_name='kdrama/award_details.html', context={'award': award})
+        award1 = get_object_or_404(award, pk=award_id)
+        return render(request=request, template_name='kdrama/award_details.html', context={'award': award1})
 
     
 class AwardAdd(View):
@@ -428,11 +428,11 @@ class AwardUpdate(View):
 
     def get(self, request, award_id):
 
-        award = get_object_or_404(award, pk=award_id)
+        award1 = get_object_or_404(award, pk=award_id)
 
-        form = AwardForm(instance=award)
+        form = AwardForm(instance=award1)
 
-        return render(request=request, template_name='kdrama/award_update.html', context={'form': form, 'award': award})
+        return render(request=request, template_name='kdrama/award_update.html', context={'form': form, 'award': award1})
 
     def post(self, request, award_id):
 
@@ -451,16 +451,16 @@ class AwardDelete(View):
     def get(self,request,award_id=None):
 
         if award_id:
-            award = award.objects.get(pk=award_id)
+            award1 = award.objects.get(pk=award_id)
         else:
-            award = award()
+            award1 = award()
 
-        form = AwardForm(instance=award)
+        form = AwardForm(instance=award1)
 
         for field in form.fields:
             form.fields[field].widget.attrs['disabled'] = True
 
-        return render(request = request,template_name = 'kdrama/award_delete.html',context = {'award':award,'form':form})
+        return render(request = request,template_name = 'kdrama/award_delete.html',context = {'award':award1,'form':form})
       
     
     def post(self,request,award_id=None):

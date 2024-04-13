@@ -12,7 +12,7 @@
             <p class="mb-2"><strong>Kdrama:</strong> {{ character.kdrama.title }}</p>
             <a href="{% url 'character_update' character.character_id %}" class="btn btn-primary">Update</a>
             <a href="{% url 'character_delete' character.character_id %}" class="btn btn-danger">Delete</a>
-            <a href="{% url 'character_list' %}" class="btn btn-secondary">Back to List</a>
+            <a href="{% url 'character-list' %}" class="btn btn-secondary">Back to List</a>
         </div>
     </div>
 {% endblock %}
