@@ -534,20 +534,4 @@ class AwardDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = award.objects.all()
     serializer_class = AwardSerializer
-
-
-class KdramaListView(LoginRequiredMixin, View):
-
-    def get(self,request):
-        user_message = ""
-        customers = None
-
-        if not can_view_cust(request):
-            user_message = "Cannot View Customers. Not in 'Can View Customer' Group!"
-        else:
-            customers = Customer.objects.all()
-        return render(request=request,
-                      template_name='customer/customer_list.html',
-                      context = {'customers':customers,
-                                 'user_message':user_message}
-                      )
+#change
