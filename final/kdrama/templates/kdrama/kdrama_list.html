@@ -1,3 +1,4 @@
+
 {% extends 'base.html' %}
 {% block title %}Kdrama List{% endblock %}
 {% block content %}
@@ -6,11 +7,21 @@
             <h2 class="mb-0">Kdrama List</h2>
         </div>
         <div class="card-body">
+           
+            <a href="{% url 'kdrama_add' %}" class="btn btn-primary mb-3">Add Kdrama</a>
             <ul>
                 {% for kdrama in kdramas %}
-                    <li><a href="{% url 'kdrama_details' kdrama.kdrama_id %}">{{ kdrama.title }}</a></li>
+                    <li>{{ kdrama.title }}
+                        
+                        <a href="{% url 'kdrama_details' kdrama_id=kdrama.pk %}" class="btn btn-info btn-sm">Details</a>
+                        
+                        <a href="{% url 'kdrama_delete' kdrama_id=kdrama.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                        
+                        <a href="{% url 'kdrama_update' kdrama_id=kdrama.pk %}" class="btn btn-secondary btn-sm">Update</a>
+                    </li>
                 {% endfor %}
             </ul>
         </div>
     </div>
 {% endblock %}
+
