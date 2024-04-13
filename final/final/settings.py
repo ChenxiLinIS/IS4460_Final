@@ -106,7 +106,7 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-LOGIN_REDIRECT_URL = "/accounts/login"
+LOGIN_REDIRECT_URL = "/kdrama/kdrama_list"
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
