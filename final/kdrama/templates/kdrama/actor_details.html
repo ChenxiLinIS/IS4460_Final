@@ -14,7 +14,7 @@
             <p class="mb-2"><strong>Character:</strong> {{ actor.character.name }}</p>
             <a href="{% url 'actor_update' actor.actor_id %}" class="btn btn-primary">Update</a>
             <a href="{% url 'actor_delete' actor.actor_id %}" class="btn btn-danger">Delete</a>
-            <a href="{% url 'actor_list' %}" class="btn btn-secondary">Back to List</a>
+            <a href="{% url 'actor-list' %}" class="btn btn-secondary">Back to List</a>
         </div>
     </div>
 {% endblock %}

@@ -17,8 +17,8 @@ class KdramaList(View):
 
 class KdramaDetails(View):
     def get(self, request, kdrama_id):
-        kdrama = get_object_or_404(kdrama, pk=kdrama_id)
-        return render(request=request, template_name='kdrama/kdrama_details.html', context={'kdrama': kdrama})
+        kdrama1 = get_object_or_404(kdrama, pk=kdrama_id)
+        return render(request=request, template_name='kdrama/kdrama_details.html', context={'kdrama': kdrama1})
 
     
 class KdramaAdd(View):
@@ -172,8 +172,8 @@ class ActorList(View):
 
 class ActorDetails(View):
     def get(self, request, actor_id):
-        actor = get_object_or_404(actor, pk=actor_id)
-        return render(request=request, template_name='kdrama/actor_details.html', context={'actor': actor})
+        actor1 = get_object_or_404(actor, pk=actor_id)
+        return render(request=request, template_name='kdrama/actor_details.html', context={'actor': actor1})
 
     
 class ActorAdd(View):
@@ -197,11 +197,11 @@ class ActorUpdate(View):
 
     def get(self, request, actor_id):
 
-        actor = get_object_or_404(actor, pk=actor_id)
+        actor1 = get_object_or_404(actor, pk=actor_id)
 
-        form = ActorForm(instance=actor)
+        form = ActorForm(instance=actor1)
 
-        return render(request=request, template_name='kdrama/actor_update.html', context={'form': form, 'actor': actor})
+        return render(request=request, template_name='kdrama/actor_update.html', context={'form': form, 'actor': actor1})
 
     def post(self, request, actor_id):
 
@@ -217,28 +217,28 @@ class ActorUpdate(View):
 
 class ActorDelete(View):
 
-    def get(self,request,actor_id=None):
-
-        if actor_id:
-            actor = actor.objects.get(pk=actor_id)
+    def get(self,request,kdrama_id=None):
+        actor1 = None
+        if kdrama_id:
+            actor1 = actor.objects.get(pk=kdrama_id)
         else:
-            actor = actor()
+            actor1 = actor()
 
         form = ActorForm(instance=actor)
 
         for field in form.fields:
             form.fields[field].widget.attrs['disabled'] = True
 
-        return render(request = request,template_name = 'kdrama/actor_delete.html',context = {'actor':actor,'form':form})
+        return render(request = request,template_name = 'kdrama/actor_delete.html',context = {'actor':actor1,'form':form})
       
     
     def post(self,request,actor_id=None):
 
-        actor = actor.objects.get(pk=actor_id)
+        actor1 = actor.objects.get(pk=actor_id)
 
-        form = ActorForm(request.POST,instance=actor)
+        form = ActorForm(request.POST,instance=actor1)
 
-        actor.delete()
+        actor1.delete()
 
         return redirect(reverse("actor-list"))
     
@@ -249,8 +249,8 @@ class DirectorList(View):
 
 class DirectorDetails(View):
     def get(self, request, director_id):
-        director = get_object_or_404(actor, pk=director_id)
-        return render(request=request, template_name='kdrama/director_details.html', context={'director': director})
+        director1 = get_object_or_404(actor, pk=director_id)
+        return render(request=request, template_name='kdrama/director_details.html', context={'director': director1})
 
     
 class DirectorAdd(View):
