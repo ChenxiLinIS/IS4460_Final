@@ -54,23 +54,23 @@ class KdramaUpdate(View):
 
     def get(self, request, kdrama_id):
 
-        movie = get_object_or_404(kdrama, pk=kdrama_id)
+        kdramas = get_object_or_404(kdrama, pk=kdrama_id)
 
-        form = KdramaForm(instance=kdrama)
+        form = KdramaForm(instance=kdramas)
 
-        return render(request=request, template_name='kdrama/kdrama_update.html', context={'form': form, 'kdrama': kdrama})
+        return render(request=request, template_name='kdrama/kdrama_update.html', context={'form': form, 'kdrama': kdramas})
 
     def post(self, request, kdrama_id):
 
-        kdrama = get_object_or_404(kdrama, pk=kdrama_id)
+        Kdramas = get_object_or_404(kdrama, pk=kdrama_id)
 
-        form = KdramaForm(request.POST, instance=kdrama)
+        form = KdramaForm(request.POST, instance=Kdramas)
 
         if form.is_valid():
             form.save()
             return redirect('kdrama-list')
         
-        return render(request=request, template_name='kdrama/kdrama_update.html', context={'form': form, 'kdrama': kdrama})
+        return render(request=request, template_name='kdrama/kdrama_update.html', context={'form': form, 'kdrama': Kdramas})
 
 class KdramaDelete(View):
 
