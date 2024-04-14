@@ -1,6 +1,6 @@
 from django import forms
 from django.core.validators import MaxValueValidator
-from .models import kdrama, character, actor, director, prod_company, award
+from .models import kdrama, character, actor, director, prod_company, award, Purchase
 
 class KdramaForm(forms.ModelForm):
     class Meta:
@@ -32,4 +32,7 @@ class AwardForm(forms.ModelForm):
         model = award
         fields = '__all__'
 
-        
+class PurchaseForm(forms.ModelForm):
+    class Meta:
+        model = Purchase
+        fields = '__all__'

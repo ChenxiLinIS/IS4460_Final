@@ -58,4 +58,6 @@ urlpatterns = [
     path('award/<int:pk>/', views.AwardDetailView.as_view(), name='award-detail'),
 
     path('purchase/<int:kdrama_id>', views.PurchaseView.as_view(), name = 'purchase'),
+    path('purchase_success/', views.PurchaseSuccessView.as_view(), name='purchase_success'),
+
 ]

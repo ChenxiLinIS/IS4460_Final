@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.views import View
 from .models import kdrama, character, actor, director, prod_company, award, Purchase
-from .forms import KdramaForm, CharacterForm, ActorForm, DirectorForm, ProdCompanyForm, AwardForm
+from .forms import KdramaForm, CharacterForm, ActorForm, DirectorForm, ProdCompanyForm, AwardForm, PurchaseForm
 from rest_framework import generics
 from .serializers import KdramaSerializer, CharacterSerializer, ActorSerializer, DirectorSerializer, ProdCompanySerializer, AwardSerializer, PurchaseSerializer
 from django.shortcuts import render, redirect
@@ -478,18 +478,29 @@ class AwardDelete(View):
         award.delete()
 
         return redirect(reverse("award-list"))
-
+ 
 class PurchaseView(View):
     def get(self, request, kdrama_id):
-        kdramas = kdrama.objects.get(pk=kdrama_id)
-        return render(request, 'purchase.html', {'kdrama': kdramas})
+        kdrama_instance = get_object_or_404(kdrama, pk=kdrama_id)
+        form = PurchaseForm(initial={'kdrama': kdrama_instance})
+        return render(request, 'purchase.html', {'form': form, 'kdrama': kdrama_instance})
 
     def post(self, request, kdrama_id):
-        kdramas = kdrama.objects.get(pk=kdrama_id)
-        purchase_amount = request.POST.get('purchase_amount')
-        user_id = request.user 
-        purchase = Purchase.objects.create(kdramas=kdrama, user_id=user_id, amount=purchase_amount)
-        return render(request, 'purchase_complete.html', {'purchase': purchase})
+        kdrama_instance = get_object_or_404(kdrama, pk=kdrama_id)
+        form = PurchaseForm(request.POST)
+        if form.is_valid():
+            purchase = form.save(commit=False)
+            purchase.kdrama = kdrama_instance
+            purchase.user = request.user
+            purchase.save()
+            return redirect('purchase_success')
+        else:
+            return render(request, 'purchase.html', {'form': form, 'kdrama': kdrama_instance})
+        
+class PurchaseSuccessView(View):
+    def get(self, request):
+        return render(request, 'purchase_success.html')
+
     
 class KdramaListCreateView(generics.ListCreateAPIView):
 
