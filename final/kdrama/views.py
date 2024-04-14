@@ -77,16 +77,16 @@ class KdramaDelete(View):
     def get(self,request,kdrama_id=None):
 
         if kdrama_id:
-            kdrama = kdrama.objects.get(pk=kdrama_id)
+            kdramas = kdrama.objects.get(pk=kdrama_id)
         else:
-            kdrama = kdrama()
+            kdramas = kdrama()
 
-        form = KdramaForm(instance=kdrama)
+        form = KdramaForm(instance=kdramas)
 
         for field in form.fields:
             form.fields[field].widget.attrs['disabled'] = True
 
-        return render(request = request,template_name = 'kdrama/kdrama_delete.html',context = {'kdrama':kdrama,'form':form})
+        return render(request = request,template_name = 'kdrama/kdrama_delete.html',context = {'kdrama':kdramas,'form':form})
       
     
     def post(self,request,kdrama_id=None):

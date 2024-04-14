@@ -19,7 +19,7 @@ urlpatterns = [
     path('actor_details/<int:actor_id>/', views.ActorDetails.as_view(), name='actor_details'),
     path('actor_add/', views.ActorAdd.as_view(), name='actor_add'),
     path('actor_update/<int:actor_id>/', views.ActorUpdate.as_view(), name='actor_update'),
-    path('actor_delete/<int:kdrama_id>/', views.ActorDelete.as_view(), name='actor_delete'),
+    path('actor_delete/<int:actor_id>/', views.ActorDelete.as_view(), name='actor_delete'),
 
     path('director_list/', views.DirectorList.as_view(), name='director-list'),
     path('director_details/<int:director_id>/', views.DirectorDetails.as_view(), name='director_details'),
