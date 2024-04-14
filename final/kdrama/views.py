@@ -479,7 +479,17 @@ class AwardDelete(View):
 
         return redirect(reverse("award-list"))
 
+class PurchaseView(View):
+    def get(self, request, kdrama_id):
+        kdramas = kdrama.objects.get(pk=kdrama_id)
+        return render(request, 'purchase.html', {'kdrama': kdramas})
 
+    def post(self, request, kdrama_id):
+        kdramas = kdrama.objects.get(pk=kdrama_id)
+        purchase_amount = request.POST.get('purchase_amount')
+        user_id = request.user 
+        purchase = Purchase.objects.create(kdramas=kdrama, user_id=user_id, amount=purchase_amount)
+        return render(request, 'purchase_complete.html', {'purchase': purchase})
 class KdramaListCreateView(generics.ListCreateAPIView):
 
     queryset = kdrama.objects.all()
