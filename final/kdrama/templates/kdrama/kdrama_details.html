@@ -23,10 +23,11 @@
             
             <a href="{% url 'kdrama-list' %}" class="btn btn-secondary">Back to List</a>
             
-            <a href="{% url 'actor_details' actor_id=kdrama.actor_id %}" class="btn btn-info">Actor List</a>
-            <a href="{% url 'award_details' award_id=kdrama.award_id %}" class="btn btn-warning">Award List</a>
-            <a href="{% url 'director_details' director_id=kdrama.director_id %}" class="btn btn-success">Director List</a>
-            <a href="{% url 'prodcompany_details' prod_company_id=kdrama.prod_company_id %}" class="btn btn-primary">Production Company List</a>
+            <a href="{% url 'actor-list' %}" class="btn btn-info">Actor List</a>
+            <a href="{% url 'award-list' %}" class="btn btn-warning">Award List</a>
+            <a href="{% url 'director-list' %}" class="btn btn-success">Director List</a>
+            <a href="{% url 'prodcompany-list' %}" class="btn btn-primary">Production Company List</a>
+
         </div>
     </div>
 {% endblock %}
