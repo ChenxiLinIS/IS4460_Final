@@ -10,8 +10,12 @@
             <p class="mb-2"><strong>ID:</strong> {{ character.character_id }}</p>
             <p class="mb-2"><strong>Name:</strong> {{ character.name }}</p>
             <p class="mb-2"><strong>Kdrama:</strong> {{ character.kdrama.title }}</p>
-            <a href="{% url 'character_update' character.character_id %}" class="btn btn-primary">Update</a>
-            <a href="{% url 'character_delete' character.character_id %}" class="btn btn-danger">Delete</a>
+
+            {% if user_can_modify %}
+                <a href="{% url 'character_update' character.character_id %}" class="btn btn-primary">Update</a>
+                <a href="{% url 'character_delete' character.character_id %}" class="btn btn-danger">Delete</a>
+            {% endif %}
+
             <a href="{% url 'character-list' %}" class="btn btn-secondary">Back to List</a>
         </div>
     </div>
