@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import kdrama, character, actor, director, prod_company, award
+from .models import kdrama, character, actor, director, prod_company, award, Purchase
 
 class KdramaSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,4 +29,9 @@ class ProdCompanySerializer(serializers.ModelSerializer):
 class AwardSerializer(serializers.ModelSerializer):
     class Meta:
         model = award
+        fields = '__all__'
+
+class PurchaseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Purchase
         fields = '__all__'

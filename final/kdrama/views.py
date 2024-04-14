@@ -1,10 +1,10 @@
 from django.shortcuts import redirect, render, get_object_or_404
 from django.urls import reverse
 from django.views import View
-from .models import kdrama, character, actor, director, prod_company, award
+from .models import kdrama, character, actor, director, prod_company, award, Purchase
 from .forms import KdramaForm, CharacterForm, ActorForm, DirectorForm, ProdCompanyForm, AwardForm
 from rest_framework import generics
-from .serializers import KdramaSerializer, CharacterSerializer, ActorSerializer, DirectorSerializer, ProdCompanySerializer, AwardSerializer
+from .serializers import KdramaSerializer, CharacterSerializer, ActorSerializer, DirectorSerializer, ProdCompanySerializer, AwardSerializer, PurchaseSerializer
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -490,6 +490,7 @@ class PurchaseView(View):
         user_id = request.user 
         purchase = Purchase.objects.create(kdramas=kdrama, user_id=user_id, amount=purchase_amount)
         return render(request, 'purchase_complete.html', {'purchase': purchase})
+    
 class KdramaListCreateView(generics.ListCreateAPIView):
 
     queryset = kdrama.objects.all()
@@ -551,3 +552,4 @@ class AwardDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = award.objects.all()
     serializer_class = AwardSerializer
 #change
+
