@@ -3,16 +3,15 @@
 {% block content %}
 <div class="card mt-5">
     <div class="card-header">
-        <h2 class="mb-0">Purchase</h2>
+        <h2 class="mb-0">Submission:</h2>
     </div>
     <div class="card-body">
         <form method="post">
             {% csrf_token %}
             <div class="form-group">
-                <label for="purchase_amount">Purchase Amount:</label>
-                <input type="number" class="form-control" id="purchase_amount" name="purchase_amount" min="0" step="0.01" required>
+                <label for="purchase_amount">Happy Purchase!</label>
             </div>
-            <button type="submit" class="btn btn-primary">Submit Purchase</button>
+            <a href="{% url 'kdrama-list' %}" class="btn btn-secondary">Back to List</a>
         </form>
     </div>
 </div>
