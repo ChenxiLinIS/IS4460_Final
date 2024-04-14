@@ -66,3 +66,10 @@ class User(models.Model):
 
     def __str__(self):
         return self.username
+    
+
+class Purchase(models.Model):
+    purchase_id = models.AutoField(primary_key=True)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    kdrama = models.ForeignKey(kdrama, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits = 20, decimal_places = 2)

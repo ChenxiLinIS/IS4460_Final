@@ -7,18 +7,24 @@ from rest_framework import generics
 from .serializers import KdramaSerializer, CharacterSerializer, ActorSerializer, DirectorSerializer, ProdCompanySerializer, AwardSerializer
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
-class KdramaList(View):
-    def get(self, request):
-        kdramas = kdrama.objects.all()
-        return render(request=request, template_name='kdrama/kdrama_list.html', context={'kdramas': kdramas})
+def can_modify_information(request):
+    return request.user.groups.filter(name='Admin').exists()
 
-class KdramaDetails(View):
+class KdramaList(LoginRequiredMixin, View):
+    def get(self, request):
+        user_can_modify = can_modify_information(request)
+        kdramas = kdrama.objects.all()
+        return render(request=request, template_name='kdrama/kdrama_list.html', context={'kdramas': kdramas, 'user_can_modify': user_can_modify})
+
+class KdramaDetails(LoginRequiredMixin, View):
     def get(self, request, kdrama_id):
         kdrama1 = get_object_or_404(kdrama, pk=kdrama_id)
-        return render(request=request, template_name='kdrama/kdrama_details.html', context={'kdrama': kdrama1})
+        user_can_modify = can_modify_information(request)
+        return render(request=request, template_name='kdrama/kdrama_details.html', context={'kdrama': kdrama1,'user_can_modify': user_can_modify} )
 
     
 class KdramaAdd(View):
@@ -473,7 +479,17 @@ class AwardDelete(View):
 
         return redirect(reverse("award-list"))
 
+class PurchaseView(View):
+    def get(self, request, kdrama_id):
+        kdramas = kdrama.objects.get(pk=kdrama_id)
+        return render(request, 'purchase.html', {'kdrama': kdramas})
 
+    def post(self, request, kdrama_id):
+        kdramas = kdrama.objects.get(pk=kdrama_id)
+        purchase_amount = request.POST.get('purchase_amount')
+        user_id = request.user 
+        purchase = Purchase.objects.create(kdramas=kdrama, user_id=user_id, amount=purchase_amount)
+        return render(request, 'purchase_complete.html', {'purchase': purchase})
 class KdramaListCreateView(generics.ListCreateAPIView):
 
     queryset = kdrama.objects.all()
@@ -534,3 +550,4 @@ class AwardDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = award.objects.all()
     serializer_class = AwardSerializer
+#change
