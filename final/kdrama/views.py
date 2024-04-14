@@ -497,6 +497,10 @@ class PurchaseView(View):
         purchase = Purchase.objects.create(kdramas=kdrama, user_id=user_id, amount=purchase_amount)
         return render(request, 'purchase_complete.html', {'purchase': purchase})
     
+class PurchaseCompleteView(View):
+    def get(self, request):
+        return render(request, 'purchase_complete.html')
+
 class KdramaListCreateView(generics.ListCreateAPIView):
 
     queryset = kdrama.objects.all()
