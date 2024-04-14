@@ -563,4 +563,8 @@ class AwardDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = award.objects.all()
     serializer_class = AwardSerializer
 #change
+class PurchaseView(view):
+    def get(self, request):
+        purchases = Purchase.objects.all()
+        return render(request=request, template_name='kdrama/purchase.html', context={'purchases': purchases})
 
