@@ -31,7 +31,7 @@ class KdramaDetails(LoginRequiredMixin, View):
         user_can_modify = can_modify_information(request)
         user_can_purchase = user_purchase(request)
         return render(request=request, template_name='kdrama/kdrama_details.html', context={'kdrama': kdrama1,'user_can_modify': user_can_modify, 'user_can_purchase': user_can_purchase})
-
+        
     
 class KdramaAdd(View):
     def get(self, request):
