@@ -7,7 +7,9 @@
         </div>
         <div class="card-body">
             
-            <a href="{% url 'character_add' %}" class="btn btn-primary mb-3">Add Character</a>
+            {% if user_can_modify %}
+                <a href="{% url 'character_add' %}" class="btn btn-primary mb-3">Add Character</a>
+            {% endif %}
             
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -29,11 +31,10 @@
                                     
                                     <a href="{% url 'character_details' character.character_id %}" class="btn btn-info btn-sm">Details</a>
                                     
-                                    
-                                    <a href="{% url 'character_delete' character.character_id %}" class="btn btn-danger btn-sm">Delete</a>
-                                    
-                                    
-                                    <a href="{% url 'character_update' character.character_id %}" class="btn btn-secondary btn-sm">Update</a>
+                                    {% if user_can_modify %}
+                                        <a href="{% url 'character_delete' character.character_id %}" class="btn btn-danger btn-sm">Delete</a>                               
+                                        <a href="{% url 'character_update' character.character_id %}" class="btn btn-secondary btn-sm">Update</a>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% empty %}

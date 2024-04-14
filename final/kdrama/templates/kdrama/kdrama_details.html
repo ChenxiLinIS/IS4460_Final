@@ -20,6 +20,7 @@
                 <a href="{% url 'kdrama_update' kdrama.kdrama_id %}" class="btn btn-primary">Update</a>
                 <a href="{% url 'kdrama_delete' kdrama.kdrama_id %}" class="btn btn-danger">Delete</a>
             {% endif %}
+            
             <a href="{% url 'kdrama-list' %}" class="btn btn-secondary">Back to List</a>
             
             <a href="{% url 'actor_details' actor_id=kdrama.actor_id %}" class="btn btn-info">Actor Details</a>

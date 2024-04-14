@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 {% block title %}Production Company List{% endblock %}
 {% block content %}
@@ -7,20 +6,41 @@
             <h2 class="mb-0">Production Company List</h2>
         </div>
         <div class="card-body">
-            
-            <a href="{% url 'prodcompany_add' %}" class="btn btn-primary mb-3">Add Production Company</a>
-            <ul>
-                {% for prod_company in prod_companies %}
-                    <li>{{ prod_company.name }}
-                        
-                        <a href="{% url 'prodcompany_details' prod_company_id=prod_company.pk %}" class="btn btn-info btn-sm">Details</a>
-                        
-                        <a href="{% url 'prodcompany_delete' prod_company_id=prod_company.pk %}" class="btn btn-danger btn-sm">Delete</a>
-                        
-                        <a href="{% url 'prodcompany_update' prod_company_id=prod_company.pk %}" class="btn btn-secondary btn-sm">Update</a>
-                    </li>
-                {% endfor %}
-            </ul>
+            {% if user_can_modify %}
+                <a href="{% url 'prodcompany_add' %}" class="btn btn-primary mb-3">Add Production Company</a>
+            {% endif %}
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Founded</th>
+                            <th>Kdrama</th>
+                            <th>Actions</th>  <!-- Add Actions column -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for prod_company in prod_companies %}
+                            <tr>
+                                <td>{{ prod_company.name }}</td>
+                                <td>{{ prod_company.year_founded }}</td>
+                                <td>{{ prod_company.kdrama.title }}</td>  <!-- Assuming kdrama is a foreign key -->
+                                <td>
+                                    <a href="{% url 'prodcompany_details' prod_company_id=prod_company.pk %}" class="btn btn-info btn-sm">Details</a>
+                                    {% if user_can_modify %}
+                                        <a href="{% url 'prodcompany_delete' prod_company_id=prod_company.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                                        <a href="{% url 'prodcompany_update' prod_company_id=prod_company.pk %}" class="btn btn-secondary btn-sm">Update</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="4">No production companies available</td> <!-- Adjust colspan to match number of columns -->
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 {% endblock %}

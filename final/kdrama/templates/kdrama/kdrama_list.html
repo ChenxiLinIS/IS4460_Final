@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 {% block title %}Kdrama List{% endblock %}
 {% block content %}
@@ -10,32 +9,37 @@
             {% if user_can_modify %}
                 <a href="{% url 'kdrama_add' %}" class="btn btn-primary mb-3">Add Kdrama</a>
             {% endif %}
-            <ul>
-                {% for kdrama in kdramas %}
-                    <li>{{ kdrama.title }}
-                        
-                        <a href="{% url 'kdrama_details' kdrama_id=kdrama.pk %}" class="btn btn-info btn-sm">Details</a>
-
-                        {% if user_can_purchase %}
-                            <a href="{% url 'purchase' kdrama_id=kdrama.pk %}" class="btn btn-secondary btn-sm">Purchase</a>
-                        {% endif %}
-
-
-                        {% if user_can_modify %}
-                        
-                            <a href="{% url 'kdrama_delete' kdrama_id=kdrama.pk %}" class="btn btn-danger btn-sm">Delete</a>
-                        
-                            <a href="{% url 'kdrama_update' kdrama_id=kdrama.pk %}" class="btn btn-secondary btn-sm">Update</a>
-                        {% endif %}
-                    </li>
-                {% endfor %}
-            </ul>
-            </form>
-            <form action="{% url 'logout' %}" method="post">
-                {% csrf_token %}
-                <button type="submit">Logout</button>
-            </form>
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for kdrama in kdramas %}
+                            <tr>
+                                <td>{{ kdrama.title }}</td>
+                                <td>
+                                    <a href="{% url 'kdrama_details' kdrama_id=kdrama.pk %}" class="btn btn-info btn-sm">Details</a>
+                                    {% if user_can_purchase %}
+                                        <a href="{% url 'purchase' kdrama_id=kdrama.pk %}" class="btn btn-secondary btn-sm">Purchase</a>
+                                    {% endif %}
+                                    {% if user_can_modify %}
+                                        <a href="{% url 'kdrama_delete' kdrama_id=kdrama.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                                        <a href="{% url 'kdrama_update' kdrama_id=kdrama.pk %}" class="btn btn-secondary btn-sm">Update</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% empty %}
+                            <tr>
+                                <td colspan="2">No kdramas available</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 {% endblock %}
-
