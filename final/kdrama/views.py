@@ -30,7 +30,12 @@ class KdramaDetails(LoginRequiredMixin, View):
         kdrama1 = get_object_or_404(kdrama, pk=kdrama_id)
         user_can_modify = can_modify_information(request)
         user_can_purchase = user_purchase(request)
-        return render(request=request, template_name='kdrama/kdrama_details.html', context={'kdrama': kdrama1,'user_can_modify': user_can_modify, 'user_can_purchase': user_can_purchase})
+        actor_id = kdrama1.actor_id if kdrama1.actor_id else None
+        award_id = kdrama1.award_id if kdrama1.award_id else None
+        director_id = kdrama1.director_id if kdrama1.director_id else None
+        prod_company_id = kdrama1.prod_company_id if kdrama1.prod_company_id else None
+        
+        return render(request=request, template_name='kdrama/kdrama_details.html', context={'kdrama': kdrama1,'user_can_modify': user_can_modify, 'user_can_purchase': user_can_purchase,'actor_id': actor_id, 'award_id': award_id, 'director_id': director_id, 'prod_company_id': prod_company_id})
         
     
 class KdramaAdd(View):
