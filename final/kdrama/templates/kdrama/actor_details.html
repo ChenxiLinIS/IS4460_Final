@@ -12,8 +12,12 @@
             <p class="mb-2"><strong>Last Name:</strong> {{ actor.last_name }}</p>
             <p class="mb-2"><strong>Birth Date:</strong> {{ actor.birth_date }}</p>
             <p class="mb-2"><strong>Character:</strong> {{ actor.character.name }}</p>
+
+            {% if user_can_modify %}
             <a href="{% url 'actor_update' actor.actor_id %}" class="btn btn-primary">Update</a>
             <a href="{% url 'actor_delete' actor.actor_id %}" class="btn btn-danger">Delete</a>
+        {% endif %}
+        
             <a href="{% url 'actor-list' %}" class="btn btn-secondary">Back to List</a>
         </div>
     </div>
