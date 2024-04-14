@@ -30,12 +30,7 @@ class KdramaDetails(LoginRequiredMixin, View):
         kdrama1 = get_object_or_404(kdrama, pk=kdrama_id)
         user_can_modify = can_modify_information(request)
         user_can_purchase = user_purchase(request)
-        actor_id = kdrama1.actor_id if kdrama1.actor_id else None
-        award_id = kdrama1.award_id if kdrama1.award_id else None
-        director_id = kdrama1.director_id if kdrama1.director_id else None
-        prod_company_id = kdrama1.prod_company_id if kdrama1.prod_company_id else None
-        
-        return render(request=request, template_name='kdrama/kdrama_details.html', context={'kdrama': kdrama1,'user_can_modify': user_can_modify, 'user_can_purchase': user_can_purchase,'actor_id': actor_id, 'award_id': award_id, 'director_id': director_id, 'prod_company_id': prod_company_id})
+        return render(request=request, template_name='kdrama/kdrama_details.html', context={'kdrama': kdrama1,'user_can_modify': user_can_modify, 'user_can_purchase': user_can_purchase})
         
     
 class KdramaAdd(View):
@@ -107,12 +102,16 @@ class KdramaDelete(View):
 class CharacterList(View):
     def get(self, request):
         characters = character.objects.all()
-        return render(request=request, template_name='kdrama/character_list.html', context={'characters': characters})
+        user_can_modify = can_modify_information(request)
+        user_can_purchase = user_purchase(request)
+        return render(request=request, template_name='kdrama/character_list.html', context={'characters': characters, 'user_can_modify': user_can_modify, 'user_can_purchase': user_can_purchase})
 
 class CharacterDetails(View):
     def get(self, request, character_id):
         character1 = get_object_or_404(character, pk=character_id)
-        return render(request=request, template_name='kdrama/character_details.html', context={'character': character1})
+        user_can_modify = can_modify_information(request)
+        user_can_purchase = user_purchase(request)
+        return render(request=request, template_name='kdrama/character_details.html', context={'character': character1, 'user_can_modify': user_can_modify, 'user_can_purchase': user_can_purchase})
 
     
 class CharacterAdd(View):
@@ -185,12 +184,16 @@ class CharacterDelete(View):
 class ActorList(View):
     def get(self, request):
         actors = actor.objects.all()
-        return render(request=request, template_name='kdrama/actor_list.html', context={'actors': actors})
+        user_can_modify = can_modify_information(request)
+        user_can_purchase = user_purchase(request)
+        return render(request=request, template_name='kdrama/actor_list.html', context={'actors': actors, 'user_can_modify': user_can_modify, 'user_can_purchase': user_can_purchase})
 
 class ActorDetails(View):
     def get(self, request, actor_id):
         actor1 = get_object_or_404(actor, pk=actor_id)
-        return render(request=request, template_name='kdrama/actor_details.html', context={'actor': actor1})
+        user_can_modify = can_modify_information(request)
+        user_can_purchase = user_purchase(request)
+        return render(request=request, template_name='kdrama/actor_details.html', context={'actor': actor1, 'user_can_modify': user_can_modify, 'user_can_purchase': user_can_purchase})
 
     
 class ActorAdd(View):
@@ -262,12 +265,16 @@ class ActorDelete(View):
 class DirectorList(View):
     def get(self, request):
         directors = director.objects.all()
-        return render(request=request, template_name='kdrama/director_list.html', context={'directors': directors})
+        user_can_modify = can_modify_information(request)
+        user_can_purchase = user_purchase(request)
+        return render(request=request, template_name='kdrama/director_list.html', context={'directors': directors, 'user_can_modify': user_can_modify, 'user_can_purchase': user_can_purchase})
 
 class DirectorDetails(View):
     def get(self, request, director_id):
         directors = get_object_or_404(director, pk=director_id)
-        return render(request=request, template_name='kdrama/director_details.html', context={'director': directors})
+        user_can_modify = can_modify_information(request)
+        user_can_purchase = user_purchase(request)
+        return render(request=request, template_name='kdrama/director_details.html', context={'director': directors, 'user_can_modify': user_can_modify, 'user_can_purchase': user_can_purchase})
 
     
 class DirectorAdd(View):
@@ -339,12 +346,16 @@ class DirectorDelete(View):
 class ProdCompanyList(View):
     def get(self, request):
         prod_companies = prod_company.objects.all()
-        return render(request=request, template_name='kdrama/prodcompany_list.html', context={'prod_companies': prod_companies})
+        user_can_modify = can_modify_information(request)
+        user_can_purchase = user_purchase(request)
+        return render(request=request, template_name='kdrama/prodcompany_list.html', context={'prod_companies': prod_companies, 'user_can_modify': user_can_modify, 'user_can_purchase': user_can_purchase})
 
 class ProdCompanyDetails(View):
     def get(self, request, prod_company_id):
         prod_company1 = get_object_or_404(prod_company, pk=prod_company_id)
-        return render(request=request, template_name='kdrama/prodcompany_details.html', context={'prod_company': prod_company1})
+        user_can_modify = can_modify_information(request)
+        user_can_purchase = user_purchase(request)
+        return render(request=request, template_name='kdrama/prodcompany_details.html', context={'prod_company': prod_company1, 'user_can_modify': user_can_modify, 'user_can_purchase': user_can_purchase})
 
     
 class ProdCompanyAdd(View):
@@ -416,11 +427,15 @@ class ProdCompanyDelete(View):
 class AwardList(View):
     def get(self, request):
         awards = award.objects.all()
+        user_can_modify = can_modify_information(request)
+        user_can_purchase = user_purchase(request)
         return render(request=request, template_name='kdrama/award_list.html', context={'awards': awards})
 
 class AwardDetails(View):
     def get(self, request, award_id):
         award1 = get_object_or_404(award, pk=award_id)
+        user_can_modify = can_modify_information(request)
+        user_can_purchase = user_purchase(request)
         return render(request=request, template_name='kdrama/award_details.html', context={'award': award1})
 
     
