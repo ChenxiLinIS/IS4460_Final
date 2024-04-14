@@ -11,6 +11,11 @@
             <p class="mb-2"><strong>Description:</strong> {{ kdrama.description }}</p>
             <p class="mb-2"><strong>Date:</strong> {{ kdrama.release_year }}</p>
             <p class="mb-2"><strong>Duration:</strong> {{ kdrama.duration }}</p>
+
+            {% if user_can_purchase %}
+                <a href="{% url 'purchase' kdrama_id=kdrama.pk %}" class="btn btn-secondary btn-sm">Purchase</a>
+            {% endif %}
+
             {% if user_can_modify %}
                 <a href="{% url 'kdrama_update' kdrama.kdrama_id %}" class="btn btn-primary">Update</a>
                 <a href="{% url 'kdrama_delete' kdrama.kdrama_id %}" class="btn btn-danger">Delete</a>
