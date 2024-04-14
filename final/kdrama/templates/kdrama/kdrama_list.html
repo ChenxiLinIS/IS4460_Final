@@ -43,6 +43,10 @@
                                 <td colspan="2">No kdramas available</td>
                             </tr>
                         {% endfor %}
+                        <form action="{% url 'logout' %}"method="post">
+                            {% csrf_token %}
+                            <button type="submit">Logout</button>
+                        </form>
                     </tbody>
                 </table>
             </div>
