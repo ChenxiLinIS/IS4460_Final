@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% block title %}Kdrama List{% endblock %}
 {% block content %}
+
+    <div class="container text-center">
+        <a href="{% url 'kdrama-list' %}" class="btn btn-secondary">Back to Kdrama List</a>
+        <img src="DramaVISTA.png" alt="DramaVISTA" style="max-width: 100%; height: auto;">
+    </div>
+
     <div class="card mt-5">
         <div class="card-header">
             <h2 class="mb-0">Kdrama List</h2>
