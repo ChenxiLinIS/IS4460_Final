@@ -15,7 +15,7 @@
                     <li>{{ kdrama.title }}
                         
                         <a href="{% url 'kdrama_details' kdrama_id=kdrama.pk %}" class="btn btn-info btn-sm">Details</a>
-                        <a href="{% url 'purchase' kdrama_id=kdrama.pk %}"  class="btn btn-secondary btn-sm">Purchase</a>
+                        <a href="{% url 'purchase' kdrama_id=kdrama.pk %}" class="btn btn-secondary btn-sm">Purchase</a>
 
                         {% if user_can_modify %}
                         
