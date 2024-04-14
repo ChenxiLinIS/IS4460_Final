@@ -2,6 +2,12 @@
 {% extends 'base.html' %}
 {% block title %}Director List{% endblock %}
 {% block content %}
+<body>
+    <div class="container text-center">
+        <a href="{% url 'kdrama-list' %}" class="btn btn-info btn-sm">Home (Kdrama list)</a>
+    </div>
+</body>
+
     <div class="card mt-5">
         <div class="card-header">
             <h2 class="mb-0">Director List</h2>
