@@ -6,8 +6,9 @@
             <h2 class="mb-0">Award List</h2>
         </div>
         <div class="card-body">
-            
-            <a href="{% url 'award_add' %}" class="btn btn-primary mb-3">Add Award</a>
+            {% if user_can_modify %}
+                <a href="{% url 'award_add' %}" class="btn btn-primary mb-3">Add Award</a>
+            {% endif %}
             
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -31,11 +32,10 @@
                                     
                                     <a href="{% url 'award_details' award.award_id %}" class="btn btn-info btn-sm">Details</a>
                                     
-                                    
-                                    <a href="{% url 'award_delete' award.award_id %}" class="btn btn-danger btn-sm">Delete</a>
-                                    
-                                    
-                                    <a href="{% url 'award_update' award.award_id %}" class="btn btn-secondary btn-sm">Update</a>
+                                    {% if user_can_modify %}
+                                        <a href="{% url 'award_delete' award.award_id %}" class="btn btn-danger btn-sm">Delete</a>
+                                        <a href="{% url 'award_update' award.award_id %}" class="btn btn-secondary btn-sm">Update</a>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% empty %}
