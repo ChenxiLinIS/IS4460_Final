@@ -11,8 +11,11 @@
             <p class="mb-2"><strong>Name:</strong> {{ award.name }}</p>
             <p class="mb-2"><strong>Type:</strong> {{ award.type }}</p>
             <p class="mb-2"><strong>Kdrama:</strong> {{ award.kdrama.title }}</p>
-            <a href="{% url 'award_update' award.award_id %}" class="btn btn-primary">Update</a>
-            <a href="{% url 'award_delete' award.award_id %}" class="btn btn-danger">Delete</a>
+
+            {% if user_can_modify %}
+                <a href="{% url 'award_update' award.award_id %}" class="btn btn-primary">Update</a>
+                <a href="{% url 'award_delete' award.award_id %}" class="btn btn-danger">Delete</a>
+            {% endif %}
             <a href="{% url 'award-list' %}" class="btn btn-secondary">Back to List</a>
         </div>
     </div>
