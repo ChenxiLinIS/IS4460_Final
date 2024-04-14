@@ -56,4 +56,6 @@ urlpatterns = [
 
     path('award/', views.AwardListCreateView.as_view(), name = 'award-list-create'),
     path('award/<int:pk>/', views.AwardDetailView.as_view(), name='award-detail'),
+
+    path('purchase/<int:kdrama_id>', views.PurchaseView.as_view(), name = 'purchase-list-create'),
 ]
